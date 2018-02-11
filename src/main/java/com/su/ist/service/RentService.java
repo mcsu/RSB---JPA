@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -23,10 +24,16 @@ import com.su.ist.domain.Vehicule;
 
 import com.su.ist.service.Listener;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+
+
 
 @Service
 public class RentService {
 	EntityManagerFactory emf;
+	@PersistenceContext
 	EntityManager em;
 	EntityTransaction tx;
 	
@@ -35,23 +42,33 @@ public class RentService {
 		this.emf = Persistence.createEntityManagerFactory("manager1");
 		this.em = emf.createEntityManager();
 		this.tx = em.getTransaction();
-//		rece();
-		
-		
 	}
 	
-	
-	
-	public List<Vehicule> getVehicules(){
-		
-		List<Vehicule> list = em.createNativeQuery("SELECT * FROM vehicule where isrented = FALSE",Vehicule.class).getResultList();
-		
-		List<Vehicule> listVehicule = new ArrayList<Vehicule>();
-		for (Iterator<Vehicule> it = list.iterator(); it.hasNext();){
-			listVehicule.add(it.next());
-		}
+	public List<Vehicule> getUnrentedVehicules(){
+		//List<Vehicule> list = em.createNativeQuery("SELECT * FROM vehicule where isrented = FALSE",Vehicule.class).getResultList();
+		List<Vehicule> list = em.createQuery("SELECT p FROM Vehicule p WHERE p.isRented =:isrented", Vehicule.class)
+				.setParameter("isrented", Boolean.FALSE)
+				.getResultList();
+//		List<Vehicule> listVehicule = new ArrayList<Vehicule>();
+//		for (Iterator<Vehicule> it = list.iterator(); it.hasNext();){
+//			listVehicule.add(it.next());
+//		}
 		return list;
 	}
+	
+	public String buildMessage( List<Vehicule> list) {
+		JSONObject message = new JSONObject();
+		JSONArray content = new JSONArray();
+		for (Iterator<Vehicule> it = list.iterator(); it.hasNext();){
+			content.add(it.next());
+		}
+		message.put("content", content);
+		return message.toString();
+		
+	}
+
+	
+	
 	
 	public Vehicule getCar(String plateNumber) {	
 		//boolean re = false;

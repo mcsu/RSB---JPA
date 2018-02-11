@@ -26,7 +26,7 @@ public class RentController {
 	@ResponseBody
 	public List<Vehicule> listOfCars() throws JMSException{
 		RentService rs = new RentService();
-		return rs.getVehicules();
+		return rs.getUnrentedVehicules();
 	}
 	
 	//test

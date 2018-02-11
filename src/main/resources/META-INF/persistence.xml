@@ -10,7 +10,6 @@
     <class>com.su.ist.domain.Vehicule</class>
     <class>com.su.ist.domain.Car</class>
     <class>com.su.ist.domain.Van</class>
-    
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     
     <properties>

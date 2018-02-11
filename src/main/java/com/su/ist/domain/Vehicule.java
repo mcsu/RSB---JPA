@@ -1,31 +1,33 @@
 package com.su.ist.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 
 @Entity
 @Table(name="VEHICULE")
-public class Vehicule {
+public class Vehicule{
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
 	private long id;
+	@Column(name = "PLATENUMBER")
 	private String plateNumber;
+	@Column(name = "MOEDL")
 	private String model;
+	@Column(name = "PRICE")
 	private double price;
+	@Column(name = "NUMBER_OF_DAYS")
 	private int numberOfDays;
-	private boolean isRented;
+	@Column(name = "IS_RENTED")
+	private boolean isRented = false;
 	
 	
 	
@@ -67,5 +69,11 @@ public class Vehicule {
 	public void setNumberOfDays(int numberOfDays) {
 		this.numberOfDays = numberOfDays;
 	}
+	@Override
+	public String toString() {
+		return "Vehicule [id=" + id + ", plateNumber=" + plateNumber + ", model=" + model + ", price=" + price
+				+ ", numberOfDays=" + numberOfDays + ", isRented=" + isRented + "]";
+	}
+	
 	
 }

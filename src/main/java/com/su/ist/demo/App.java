@@ -36,23 +36,26 @@ public class App
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date beginDate = dateFormat.parse("23/09/2015");
 			p.setDate(beginDate);
-			
-		
 			Vehicule v3 = new Vehicule();
-			v3.setPlateNumber("京NH3M78");
-			v3.setModel("q7");
+			v3.setPlateNumber("京NNA917");
+			v3.setModel("QIN EV");
+			v3.setNumberOfDays(30);
+			v3.setPrice(550);
+			v3.setRented(false);
+			
 			Vehicule v4 = new Vehicule();
-			v4.setPlateNumber("京NNA917");
-			v4.setModel("qin");
+			v4.setPlateNumber("京NH3M78");
+			v4.setModel("Q7");
+			v4.setNumberOfDays(30);
+			v4.setPrice(1000);
+			v4.setRented(false);
+			
 			Vehicule v5 = new Vehicule();
-			v5.setModel("model x");
 			v5.setPlateNumber("AA11AA");
-			
-			
-			
-			
-			
-		
+			v5.setModel("Model X");
+			v5.setNumberOfDays(30);
+			v5.setPrice(800);
+			v5.setRented(false);
 		
 			
 			entityManager.persist(v3);
